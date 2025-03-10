@@ -1,0 +1,15 @@
+2025-03-05 15:28:52,634 - INFO - hls4ml_parser_test.py:126: Original ONNX model loaded and validated
+2025-03-05 15:28:52,634 - INFO - hls4ml_parser_test.py:69: Added dilations=[1, 1] to Conv node: 
+2025-03-05 15:28:52,635 - INFO - hls4ml_parser_test.py:77: Added group=1 to Conv node: 
+2025-03-05 15:28:52,636 - INFO - hls4ml_parser_test.py:136: Patched ONNX model saved as /home/aditya/Downloads/ConvWithAsymmetricPadding_patched.onnx
+2025-03-05 15:28:52,637 - INFO - hls4ml_parser_test.py:144: Converted ONNX model to ModelWrapper
+2025-03-05 15:28:52,642 - INFO - hls4ml_parser_test.py:102: Completed transformation: cleanup_model
+2025-03-05 15:28:52,666 - INFO - hls4ml_parser_test.py:102: Completed transformation: ConvertToChannelsLastAndClean
+2025-03-05 15:28:52,667 - INFO - hls4ml_parser_test.py:102: Completed transformation: GemmToMatMul
+2025-03-05 15:28:52,677 - INFO - hls4ml_parser_test.py:102: Completed transformation: final_cleanup
+2025-03-05 15:28:52,678 - INFO - hls4ml_parser_test.py:164: Generated HLS4ML configuration from the ONNX model
+2025-03-05 15:28:52,693 - INFO - hls4ml_parser_test.py:180: Converted the ONNX model to an HLS4ML model instance
+2025-03-05 15:28:52,694 - INFO - hls4ml_parser.py:113: Successfully parsed 5 layers
+2025-03-05 15:28:52,695 - INFO - hls4ml_parser.py:114: Total parameters: 10
+2025-03-05 15:28:52,695 - INFO - hls4ml_parser.py:115: Estimated MACs: 72
+2025-03-05 15:28:52,730 - INFO - hls4ml_parser_test.py:197: Model configuration saved to hls4ml_prj_onnx/parsed_model_config_onnx.json

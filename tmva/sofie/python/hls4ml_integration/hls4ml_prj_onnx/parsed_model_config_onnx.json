@@ -1,0 +1,154 @@
+{
+  "model_metadata": {
+    "name": "myproject",
+    "reuse_factor": 1,
+    "clock_period": 5,
+    "backend": "Vivado"
+  },
+  "layers": {
+    "global_in": {
+      "type": "Input",
+      "base_attributes": {},
+      "type_attributes": {},
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": null,
+      "output_shape": [
+        1,
+        7,
+        5
+      ]
+    },
+    "Transpose_0": {
+      "type": "Transpose",
+      "base_attributes": {},
+      "type_attributes": {},
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        1,
+        7,
+        5
+      ],
+      "output_shape": [
+        7,
+        5,
+        1
+      ]
+    },
+    "zp2d_Conv2D_Conv_0": {
+      "type": "ZeroPadding2D",
+      "base_attributes": {},
+      "type_attributes": {},
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        7,
+        5,
+        1
+      ],
+      "output_shape": [
+        9,
+        5,
+        1
+      ]
+    },
+    "Conv2D_Conv_0": {
+      "type": "Conv2D",
+      "base_attributes": {},
+      "type_attributes": {},
+      "inputs": [],
+      "outputs": [],
+      "weights": {
+        "kernel": {
+          "shape": [
+            3,
+            3,
+            1,
+            1
+          ],
+          "size": 9,
+          "dtype": "float32"
+        },
+        "bias": {
+          "shape": [
+            1
+          ],
+          "size": 1,
+          "dtype": "float64"
+        }
+      },
+      "computational_metrics": {
+        "parameters": 10,
+        "macs": 72
+      },
+      "input_shape": [
+        9,
+        5,
+        1
+      ],
+      "output_shape": [
+        4,
+        2,
+        1
+      ]
+    },
+    "Transpose_1": {
+      "type": "Transpose",
+      "base_attributes": {},
+      "type_attributes": {},
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        4,
+        2,
+        1
+      ],
+      "output_shape": [
+        1,
+        4,
+        2
+      ]
+    }
+  },
+  "model_structure": {
+    "input_layers": [
+      "global_in"
+    ],
+    "output_layers": [
+      "Transpose_1"
+    ],
+    "layer_sequence": [
+      "global_in",
+      "Transpose_0",
+      "zp2d_Conv2D_Conv_0",
+      "Conv2D_Conv_0",
+      "Transpose_1"
+    ],
+    "total_layers": 5
+  },
+  "performance_metrics": {
+    "total_parameters": 10,
+    "estimated_macs": 72
+  }
+}

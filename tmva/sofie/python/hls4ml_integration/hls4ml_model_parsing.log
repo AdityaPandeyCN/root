@@ -1,0 +1,15 @@
+2025-03-04 22:42:43,713 - INFO: ReuseFactor was None, defaulting to 1
+2025-03-04 22:42:43,714 - WARNING: Error processing attribute global_in: 'VivadoStreamVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,715 - WARNING: Error processing attribute Transpose_0_out0: 'VivadoStreamVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,716 - WARNING: Error processing attribute zp2d_Conv2D_Conv_0: 'VivadoStreamVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,717 - WARNING: Error processing attribute Conv_0_out0: 'VivadoStreamVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,718 - WARNING: Error processing attribute weight: 'StaticWeightVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,718 - WARNING: Error processing attribute bias: 'StaticWeightVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,719 - WARNING: Error processing weight weight: 'StaticWeightVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,719 - WARNING: Error processing weight bias: 'StaticWeightVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,720 - WARNING: Error processing attribute global_out: 'VivadoStreamVariable' object has no attribute 'dtype'
+2025-03-04 22:42:43,720 - INFO: Parsed 5 layers
+2025-03-04 22:42:43,721 - INFO: Input layers: []
+2025-03-04 22:42:43,721 - INFO: Output layers: []
+2025-03-04 22:42:43,721 - INFO: Total model parameters: 0
+2025-03-04 22:42:43,723 - INFO: Model configuration saved to hls4ml_prj_onnx/parsed_model_config_onnx.json
