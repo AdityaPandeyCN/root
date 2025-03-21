@@ -1,0 +1,986 @@
+{
+  "model_metadata": {
+    "name": "myproject",
+    "reuse_factor": 1,
+    "clock_period": 5,
+    "backend": "Vivado"
+  },
+  "layers": {
+    "dense_input": {
+      "type": "Input",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_input",
+        "index": 1,
+        "inputs": [
+          "input"
+        ],
+        "outputs": [
+          "dense_input"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_input",
+        "class_name": "InputLayer",
+        "data_format": "channels_last",
+        "input_shape": [
+          5
+        ],
+        "index": 1,
+        "trace": false,
+        "precision": {
+          "result": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_input": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            5
+          ],
+          "size": 5,
+          "dtype": "None"
+        },
+        "reuse_factor": 1,
+        "target_cycles": null
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": null,
+      "output_shape": [
+        5
+      ]
+    },
+    "dense": {
+      "type": "Dense",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense",
+        "index": 2,
+        "inputs": [
+          "dense_input"
+        ],
+        "outputs": [
+          "dense"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense",
+        "class_name": "Dense",
+        "data_format": "channels_last",
+        "activation": "relu",
+        "use_bias": true,
+        "weight_data": [
+          [
+            -0.06348210573196411,
+            -0.26216065883636475,
+            -0.3166162073612213,
+            0.04092961549758911,
+            0.023480892181396484,
+            -0.07569783926010132,
+            -0.1800561249256134,
+            -0.17048749327659607,
+            0.5865997672080994,
+            0.08006632328033447
+          ],
+          [
+            0.025942087173461914,
+            0.5404438376426697,
+            0.3546672463417053,
+            0.046407461166381836,
+            0.46805495023727417,
+            0.33536696434020996,
+            -0.05697011947631836,
+            -0.18631568551063538,
+            0.4264039397239685,
+            -0.39228278398513794
+          ],
+          [
+            -0.0722774863243103,
+            0.4116540551185608,
+            -0.2558537423610687,
+            -0.22267019748687744,
+            0.5242084860801697,
+            0.5055237412452698,
+            0.6121787428855896,
+            -0.2607290744781494,
+            -0.4449843764305115,
+            0.3892410397529602
+          ],
+          [
+            -0.4636736214160919,
+            0.5520225167274475,
+            -0.032564401626586914,
+            -0.03722351789474487,
+            0.18523120880126953,
+            0.10188883543014526,
+            -0.13873568177223206,
+            -0.17754757404327393,
+            -0.48229318857192993,
+            -0.07335346937179565
+          ],
+          [
+            -0.3118586540222168,
+            0.23710685968399048,
+            -0.08115863800048828,
+            -0.1673637330532074,
+            -0.5526381731033325,
+            0.2968887686729431,
+            0.37664514780044556,
+            0.15823030471801758,
+            0.04435539245605469,
+            0.42264240980148315
+          ]
+        ],
+        "bias_data": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "n_in": 5,
+        "n_out": 10,
+        "weight_quantizer": null,
+        "bias_quantizer": null,
+        "index": 2,
+        "accum_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "trace": false,
+        "precision": {
+          "result": "auto",
+          "weight": "auto",
+          "bias": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 36,
+            "integer": 16,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            10
+          ],
+          "size": 10,
+          "dtype": "None"
+        },
+        "weight_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "weight": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            5,
+            10
+          ],
+          "size": 50,
+          "dtype": "None"
+        },
+        "bias_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "bias": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            10
+          ],
+          "size": 10,
+          "dtype": "None"
+        },
+        "reuse_factor": 1,
+        "target_cycles": null,
+        "strategy": "latency",
+        "index_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APIntegerPrecisionType",
+            "width": 1,
+            "integer": 1,
+            "signed": false
+          },
+          "width": null
+        },
+        "config_cpp": "struct config2 : nnet::dense_config {\n    static const unsigned n_in = 5;\n    static const unsigned n_out = 10;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned strategy = nnet::latency;\n    static const unsigned reuse_factor = 1;\n    static const unsigned n_zeros = 0;\n    static const unsigned n_nonzeros = 50;\n    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;\n    static const bool store_weights_in_bram = false;\n    typedef model_default_t accum_t;\n    typedef dense_bias_t bias_t;\n    typedef dense_weight_t weight_t;\n    typedef layer2_index index_t;\n    template<class data_T, class res_T, class CONFIG_T>\n    using kernel = nnet::DenseLatency<data_T, res_T, CONFIG_T>;\n    template<class x_T, class y_T>\n    using product = nnet::product::mult<x_T, y_T>;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_dense.h",
+          "nnet_utils/nnet_dense_compressed.h",
+          "nnet_utils/nnet_dense_stream.h"
+        ],
+        "function_cpp": "nnet::dense<input_t, dense_result_t, config2>(dense_input, layer2_out, w2, b2);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 60,
+        "macs": 50
+      },
+      "input_shape": [
+        5
+      ],
+      "output_shape": [
+        10
+      ]
+    },
+    "dense_relu": {
+      "type": "Activation",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_relu",
+        "index": 3,
+        "inputs": [
+          "dense"
+        ],
+        "outputs": [
+          "dense_relu"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_relu",
+        "class_name": "Activation",
+        "data_format": "channels_last",
+        "activation": "relu",
+        "index": 3,
+        "trace": false,
+        "precision": {
+          "result": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_relu": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            10
+          ],
+          "size": 10,
+          "dtype": "None"
+        },
+        "n_in": 10,
+        "reuse_factor": 1,
+        "table_size": 1024,
+        "table_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 18,
+            "integer": 8,
+            "signed": true
+          },
+          "width": null
+        },
+        "target_cycles": null,
+        "config_cpp": "struct relu_config3 : nnet::activ_config {\n    static const unsigned n_in = 10;\n    static const unsigned table_size = 1024;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned reuse_factor = 1;\n    typedef dense_relu_table_t table_t;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_activation.h",
+          "nnet_utils/nnet_activation_stream.h"
+        ],
+        "function_cpp": "nnet::relu<dense_result_t, layer3_t, relu_config3>(layer2_out, layer3_out);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        10
+      ],
+      "output_shape": [
+        10
+      ]
+    },
+    "dense_1": {
+      "type": "Dense",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_1",
+        "index": 4,
+        "inputs": [
+          "dense_relu"
+        ],
+        "outputs": [
+          "dense_1"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_1",
+        "class_name": "Dense",
+        "data_format": "channels_last",
+        "activation": "relu",
+        "use_bias": true,
+        "weight_data": [
+          [
+            -0.27232369780540466,
+            0.04828602075576782,
+            -0.016454696655273438,
+            -0.4130971431732178,
+            0.4139801859855652
+          ],
+          [
+            -0.604219377040863,
+            0.4574725031852722,
+            -0.5956453084945679,
+            0.49117714166641235,
+            0.16842275857925415
+          ],
+          [
+            -0.47006964683532715,
+            -0.32807043194770813,
+            0.39809077978134155,
+            -0.21002408862113953,
+            0.38039129972457886
+          ],
+          [
+            -0.06813395023345947,
+            -0.5095073580741882,
+            -0.22752425074577332,
+            -0.29544797539711,
+            -0.08996516466140747
+          ],
+          [
+            0.5252450108528137,
+            -0.01868969202041626,
+            -0.29370784759521484,
+            -0.5240001082420349,
+            -0.24739402532577515
+          ],
+          [
+            0.13921505212783813,
+            -0.6205986738204956,
+            0.5373333096504211,
+            -0.30812570452690125,
+            0.6023980975151062
+          ],
+          [
+            -0.5674786567687988,
+            0.3008018732070923,
+            0.35908371210098267,
+            0.4707215428352356,
+            0.3590729832649231
+          ],
+          [
+            -0.34298062324523926,
+            0.3834245800971985,
+            0.4678111672401428,
+            0.20135539770126343,
+            0.04213744401931763
+          ],
+          [
+            0.0012035965919494629,
+            0.041467487812042236,
+            0.505403459072113,
+            -0.1713494062423706,
+            0.343763530254364
+          ],
+          [
+            0.2173876166343689,
+            0.054808974266052246,
+            -0.23486346006393433,
+            0.06113547086715698,
+            0.57382732629776
+          ]
+        ],
+        "bias_data": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "n_in": 10,
+        "n_out": 5,
+        "weight_quantizer": null,
+        "bias_quantizer": null,
+        "index": 4,
+        "accum_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "trace": false,
+        "precision": {
+          "result": "auto",
+          "weight": "auto",
+          "bias": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 37,
+            "integer": 17,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_1": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            5
+          ],
+          "size": 5,
+          "dtype": "None"
+        },
+        "weight_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "weight": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            10,
+            5
+          ],
+          "size": 50,
+          "dtype": "None"
+        },
+        "bias_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "bias": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            5
+          ],
+          "size": 5,
+          "dtype": "None"
+        },
+        "reuse_factor": 1,
+        "target_cycles": null,
+        "strategy": "latency",
+        "index_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APIntegerPrecisionType",
+            "width": 1,
+            "integer": 1,
+            "signed": false
+          },
+          "width": null
+        },
+        "config_cpp": "struct config4 : nnet::dense_config {\n    static const unsigned n_in = 10;\n    static const unsigned n_out = 5;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned strategy = nnet::latency;\n    static const unsigned reuse_factor = 1;\n    static const unsigned n_zeros = 0;\n    static const unsigned n_nonzeros = 50;\n    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;\n    static const bool store_weights_in_bram = false;\n    typedef model_default_t accum_t;\n    typedef dense_1_bias_t bias_t;\n    typedef dense_1_weight_t weight_t;\n    typedef layer4_index index_t;\n    template<class data_T, class res_T, class CONFIG_T>\n    using kernel = nnet::DenseLatency<data_T, res_T, CONFIG_T>;\n    template<class x_T, class y_T>\n    using product = nnet::product::mult<x_T, y_T>;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_dense.h",
+          "nnet_utils/nnet_dense_compressed.h",
+          "nnet_utils/nnet_dense_stream.h"
+        ],
+        "function_cpp": "nnet::dense<layer3_t, dense_1_result_t, config4>(layer3_out, layer4_out, w4, b4);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 55,
+        "macs": 50
+      },
+      "input_shape": [
+        10
+      ],
+      "output_shape": [
+        5
+      ]
+    },
+    "dense_1_relu": {
+      "type": "Activation",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_1_relu",
+        "index": 5,
+        "inputs": [
+          "dense_1"
+        ],
+        "outputs": [
+          "dense_1_relu"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_1_relu",
+        "class_name": "Activation",
+        "data_format": "channels_last",
+        "activation": "relu",
+        "index": 5,
+        "trace": false,
+        "precision": {
+          "result": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_1_relu": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            5
+          ],
+          "size": 5,
+          "dtype": "None"
+        },
+        "n_in": 5,
+        "reuse_factor": 1,
+        "table_size": 1024,
+        "table_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 18,
+            "integer": 8,
+            "signed": true
+          },
+          "width": null
+        },
+        "target_cycles": null,
+        "config_cpp": "struct relu_config5 : nnet::activ_config {\n    static const unsigned n_in = 5;\n    static const unsigned table_size = 1024;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned reuse_factor = 1;\n    typedef dense_1_relu_table_t table_t;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_activation.h",
+          "nnet_utils/nnet_activation_stream.h"
+        ],
+        "function_cpp": "nnet::relu<dense_1_result_t, layer5_t, relu_config5>(layer4_out, layer5_out);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        5
+      ],
+      "output_shape": [
+        5
+      ]
+    },
+    "dense_2": {
+      "type": "Dense",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_2",
+        "index": 6,
+        "inputs": [
+          "dense_1_relu"
+        ],
+        "outputs": [
+          "dense_2"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_2",
+        "class_name": "Dense",
+        "data_format": "channels_last",
+        "activation": "sigmoid",
+        "use_bias": true,
+        "weight_data": [
+          [
+            0.42905712127685547
+          ],
+          [
+            -0.18396282196044922
+          ],
+          [
+            -0.507972240447998
+          ],
+          [
+            -0.31782007217407227
+          ],
+          [
+            -0.5471806526184082
+          ]
+        ],
+        "bias_data": [
+          0.0
+        ],
+        "n_in": 5,
+        "n_out": 1,
+        "weight_quantizer": null,
+        "bias_quantizer": null,
+        "index": 6,
+        "accum_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "trace": false,
+        "precision": {
+          "result": "auto",
+          "weight": "auto",
+          "bias": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 36,
+            "integer": 16,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_2": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            1
+          ],
+          "size": 1,
+          "dtype": "None"
+        },
+        "weight_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "weight": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            5,
+            1
+          ],
+          "size": 5,
+          "dtype": "None"
+        },
+        "bias_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "bias": {
+          "type": "StaticWeightVariable",
+          "shape": [
+            1
+          ],
+          "size": 1,
+          "dtype": "None"
+        },
+        "reuse_factor": 1,
+        "target_cycles": null,
+        "strategy": "latency",
+        "index_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APIntegerPrecisionType",
+            "width": 1,
+            "integer": 1,
+            "signed": false
+          },
+          "width": null
+        },
+        "config_cpp": "struct config6 : nnet::dense_config {\n    static const unsigned n_in = 5;\n    static const unsigned n_out = 1;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned strategy = nnet::latency;\n    static const unsigned reuse_factor = 1;\n    static const unsigned n_zeros = 0;\n    static const unsigned n_nonzeros = 5;\n    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;\n    static const bool store_weights_in_bram = false;\n    typedef model_default_t accum_t;\n    typedef dense_2_bias_t bias_t;\n    typedef dense_2_weight_t weight_t;\n    typedef layer6_index index_t;\n    template<class data_T, class res_T, class CONFIG_T>\n    using kernel = nnet::DenseLatency<data_T, res_T, CONFIG_T>;\n    template<class x_T, class y_T>\n    using product = nnet::product::mult<x_T, y_T>;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_dense.h",
+          "nnet_utils/nnet_dense_compressed.h",
+          "nnet_utils/nnet_dense_stream.h"
+        ],
+        "function_cpp": "nnet::dense<layer5_t, dense_2_result_t, config6>(layer5_out, layer6_out, w6, b6);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 6,
+        "macs": 5
+      },
+      "input_shape": [
+        5
+      ],
+      "output_shape": [
+        1
+      ]
+    },
+    "dense_2_sigmoid": {
+      "type": "Activation",
+      "base_attributes": {
+        "model": {
+          "type": "ModelGraph"
+        },
+        "name": "dense_2_sigmoid",
+        "index": 7,
+        "inputs": [
+          "dense_2"
+        ],
+        "outputs": [
+          "dense_2_sigmoid"
+        ],
+        "weights": {
+          "type": "WeightMapping"
+        },
+        "variables": {
+          "type": "VariableMapping"
+        },
+        "types": {
+          "type": "TypeMapping"
+        },
+        "code": {
+          "type": "CodeMapping"
+        },
+        "channels_last_converted": true
+      },
+      "type_attributes": {
+        "name": "dense_2_sigmoid",
+        "class_name": "Activation",
+        "data_format": "channels_last",
+        "activation": "sigmoid",
+        "index": 7,
+        "trace": false,
+        "precision": {
+          "result": "auto"
+        },
+        "result_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 16,
+            "integer": 6,
+            "signed": true
+          },
+          "width": null
+        },
+        "dense_2_sigmoid": {
+          "type": "VivadoArrayVariable",
+          "shape": [
+            1
+          ],
+          "size": 1,
+          "dtype": "None"
+        },
+        "n_in": 1,
+        "reuse_factor": 1,
+        "table_size": 1024,
+        "table_t": {
+          "type": "HLSNamedType",
+          "precision": {
+            "type": "APFixedPrecisionType",
+            "width": 18,
+            "integer": 8,
+            "signed": true
+          },
+          "width": null
+        },
+        "target_cycles": null,
+        "config_cpp": "struct sigmoid_config7 : nnet::activ_config {\n    static const unsigned n_in = 1;\n    static const unsigned table_size = 1024;\n    static const unsigned io_type = nnet::io_parallel;\n    static const unsigned reuse_factor = 1;\n    typedef dense_2_sigmoid_table_t table_t;\n};\n",
+        "include_header": [
+          "nnet_utils/nnet_activation.h",
+          "nnet_utils/nnet_activation_stream.h"
+        ],
+        "function_cpp": "nnet::sigmoid<dense_2_result_t, result_t, sigmoid_config7>(layer6_out, layer7_out);"
+      },
+      "inputs": [],
+      "outputs": [],
+      "weights": {},
+      "computational_metrics": {
+        "parameters": 0,
+        "macs": 0
+      },
+      "input_shape": [
+        1
+      ],
+      "output_shape": [
+        1
+      ]
+    }
+  },
+  "model_structure": {
+    "input_layers": [
+      "dense_input"
+    ],
+    "output_layers": [
+      "dense_2_sigmoid"
+    ],
+    "layer_sequence": [
+      "dense_input",
+      "dense",
+      "dense_relu",
+      "dense_1",
+      "dense_1_relu",
+      "dense_2",
+      "dense_2_sigmoid"
+    ],
+    "total_layers": 7
+  },
+  "performance_metrics": {
+    "total_parameters": 121,
+    "estimated_macs": 105
+  }
+}
