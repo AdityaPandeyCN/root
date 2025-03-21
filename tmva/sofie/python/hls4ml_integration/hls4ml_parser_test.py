@@ -724,3 +724,59 @@ def test_hls4ml_model_inspection(hls_model, verbose=True):
                 print(f"  Variable keys: {list(layer.variables.keys())}")
     
     print("\n==== END OF INSPECTION ====")
+
+if __name__ == "__main__":
+    try:
+        # Import required libraries
+        import tensorflow as tf
+        import hls4ml
+        
+        print("Loading and converting a Keras model to HLS4ML...")
+        
+        # Create a simple Keras model to test
+        model = tf.keras.Sequential([
+            tf.keras.layers.Dense(10, activation='relu', input_shape=(5,)),
+            tf.keras.layers.Dense(5, activation='relu'),
+            tf.keras.layers.Dense(1, activation='sigmoid')
+        ])
+        
+        # Compile the model
+        model.compile(optimizer='adam', loss='binary_crossentropy')
+        
+        # Convert to HLS4ML model
+        hls_config = hls4ml.utils.config_from_keras_model(model, granularity='name')
+        hls_model = hls4ml.converters.convert_from_keras_model(
+            model, 
+            hls_config=hls_config,
+            output_dir='hls4ml_test_model',
+            part='xcu250-figd2104-2L-e'
+        )
+        
+        print("\n--- Test HLS4ML Model Inspection ---")
+        test_hls4ml_model_inspection(hls_model, verbose=True)
+        
+        print("\n--- Test HLS4ML to SOFIE Conversion ---")
+        rmodel = parse_hls4ml_to_sofie(hls_model, verbose=True)
+        
+        # Now test the original parser
+        print("\n--- Test Original HLS4ML Parser ---")
+        from hls4ml_parser import parse_hls4ml_model
+        config_data = parse_hls4ml_model(hls_model)
+        
+        if config_data:
+            print("Successfully parsed the model!")
+            # Save the config to a file
+            import json
+            from hls4ml_parser import NumpyEncoder
+            
+            with open('model_config_fixed.json', 'w') as f:
+                json.dump(config_data, f, cls=NumpyEncoder, indent=2)
+            print("Saved model configuration to model_config_fixed.json")
+        else:
+            print("Failed to parse the model!")
+            
+    except ImportError as e:
+        print(f"Error: Required module not found - {e}")
+        print("Please make sure tensorflow and hls4ml are installed.")
+    except Exception as e:
+        print(f"Error: {e}")
