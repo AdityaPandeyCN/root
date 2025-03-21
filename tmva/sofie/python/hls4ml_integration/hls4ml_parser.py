@@ -11,13 +11,72 @@ class NumpyEncoder(json.JSONEncoder):
     Custom JSON encoder to handle NumPy array and numeric types.
     
     Converts NumPy arrays to lists and NumPy numeric types to Python native types.
+    Also handles HLS4ML-specific types.
     """
-    def default(self, obj: Union[np.ndarray, np.number]) -> Union[List, int, float]:
+    def default(self, obj: Any) -> Any:
         if isinstance(obj, np.ndarray):
             return obj.tolist()
         if isinstance(obj, (np.integer, np.floating)):
             return obj.item()
+        
+        # Handle HLS4ML precision types
+        type_name = type(obj).__name__
+        if type_name in ['APFixedPrecisionType', 'APIntegerPrecisionType']:
+            result = {
+                "type": type_name,
+            }
+            # Add common attributes
+            for attr in ['width', 'integer', 'signed']:
+                if hasattr(obj, attr):
+                    result[attr] = getattr(obj, attr)
+            return result
+        
+        # Handle RoundingMode and SaturationMode enums
+        if type_name in ['RoundingMode', 'SaturationMode']:
+            # Convert enum to string representation
+            return str(obj)
+        
+        # Generic handler for other HLS4ML types
+        if 'hls4ml' in str(type(obj)):
+            return {"type": type_name}
+            
         return super().default(obj)
+
+def extract_object_properties(obj):
+    """Extract meaningful properties from HLS4ML objects."""
+    if obj is None:
+        return None
+        
+    # For HLSNamedType objects
+    if hasattr(obj, 'precision'):
+        return {
+            "type": obj.__class__.__name__,
+            "precision": getattr(obj, 'precision', None),
+            "width": getattr(obj, 'width', None)
+        }
+    
+    # For VivadoArrayVariable objects
+    if hasattr(obj, 'shape'):
+        shape_value = getattr(obj, 'shape', None)
+        return {
+            "type": obj.__class__.__name__,
+            "shape": shape_value,
+            "size": int(np.prod(shape_value)) if shape_value is not None else None,
+            "dtype": str(getattr(obj, 'dtype', None))
+        }
+    
+    # For weight variables
+    if hasattr(obj, 'data') and hasattr(obj.data, 'shape'):
+        return {
+            "type": obj.__class__.__name__,
+            "shape": obj.data.shape,
+            "data_type": str(obj.data.dtype)
+        }
+    
+    # For other objects, return basic type info
+    return {
+        "type": obj.__class__.__name__
+    }
 
 def parse_hls4ml_model(hls_model: Any, verbose: bool = True) -> Optional[Dict[str, Any]]:
     """
@@ -90,9 +149,37 @@ def parse_hls4ml_model(hls_model: Any, verbose: bool = True) -> Optional[Dict[st
                 except Exception as e:
                     logger.debug(f"Output shape error for {layer_name}: {str(e)}")
 
-                # Convolutional layer parameter extraction
-                if "Conv" in raw_type:
-                    _process_conv_layer(layer, layer_name, layer_config)
+                # Extract layer attributes
+                if hasattr(layer, 'attributes'):
+                    for attr_name, attr_value in layer.attributes.items():
+                        if hasattr(attr_value, '__module__') and 'hls4ml' in str(attr_value.__module__):
+                            layer_config["type_attributes"][attr_name] = extract_object_properties(attr_value)
+                        else:
+                            layer_config["type_attributes"][attr_name] = attr_value
+
+                # Process other base attributes
+                for attr_name, attr_value in vars(layer).items():
+                    if attr_name.startswith('_') or attr_name == 'attributes':
+                        continue
+                    
+                    if hasattr(attr_value, '__module__') and 'hls4ml' in str(attr_value.__module__):
+                        layer_config["base_attributes"][attr_name] = extract_object_properties(attr_value)
+                    else:
+                        layer_config["base_attributes"][attr_name] = attr_value
+
+                # Extract input/output connections
+                if hasattr(layer, 'inputs'):
+                    for inp in layer.inputs:
+                        if hasattr(inp, 'name'):
+                            layer_config["inputs"].append(inp.name)
+                
+                if hasattr(layer, 'outputs'):
+                    for out in layer.outputs:
+                        if hasattr(out, 'name'):
+                            layer_config["outputs"].append(out.name)
+
+                # Calculate layer metrics (parameters and MACs)
+                _process_layer_metrics(layer, layer_name, layer_config)
 
                 # Input/Output layer detection
                 if "Input" in raw_type:
@@ -119,6 +206,58 @@ def parse_hls4ml_model(hls_model: Any, verbose: bool = True) -> Optional[Dict[st
     except Exception as e:
         logger.error(f"Model parsing failed: {str(e)}", exc_info=True)
         return None
+
+def _process_layer_metrics(layer: Any, layer_name: str, layer_config: Dict[str, Any]) -> None:
+    """
+    Calculate computational metrics (parameters and MACs) for a layer.
+    
+    Args:
+        layer: The layer to process
+        layer_name: Name of the layer
+        layer_config: Configuration dictionary to be updated with metrics
+    """
+    params = 0
+    macs = 0
+    
+    # Extract layer type
+    layer_type = layer_config["type"]
+    
+    # For Dense layers
+    if "Dense" in layer_type:
+        # Parameters calculation for Dense layers
+        if hasattr(layer, 'get_weights'):
+            weights_data = layer.get_weights()
+            weights_list = _extract_weights(weights_data, layer_name)
+            
+            # Weight parameters
+            if len(weights_list) > 0:
+                kernel_data = _sanitize_weight_data(weights_list[0], layer_name)
+                if isinstance(kernel_data, np.ndarray):
+                    kernel_size = int(np.prod(kernel_data.shape))
+                    params += kernel_size
+            
+            # Bias parameters
+            if len(weights_list) > 1:
+                bias_data = _sanitize_weight_data(weights_list[1], layer_name)
+                if isinstance(bias_data, np.ndarray):
+                    bias_size = int(np.prod(bias_data.shape))
+                    params += bias_size
+        
+        # MACs calculation for Dense layers
+        if "n_in" in layer_config["type_attributes"] and "n_out" in layer_config["type_attributes"]:
+            n_in = layer_config["type_attributes"]["n_in"]
+            n_out = layer_config["type_attributes"]["n_out"]
+            macs = n_in * n_out
+    
+    # For Convolutional layers
+    elif "Conv" in layer_type:
+        # Parameters and MACs calculation for convolutional layers
+        _process_conv_layer(layer, layer_name, layer_config)
+        return  # Conv layers have their own processing
+    
+    # Update computational metrics
+    layer_config["computational_metrics"]["parameters"] = params
+    layer_config["computational_metrics"]["macs"] = macs
 
 def _process_conv_layer(layer: Any, layer_name: str, layer_config: Dict[str, Any]) -> None:
     """
